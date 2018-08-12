@@ -17,6 +17,7 @@ function displaySymbol(card) {
 function resetCard(card) {
   card.classList.remove('open');
   card.classList.remove('show');
+  card.classList.remove('match');
 }
 
 function lockOpenCard(card) {
@@ -81,9 +82,27 @@ function shuffle(cards) {
      cards.appendChild(cards.children[Math.random() * i | 0]);
   }
 }
-
+ // entry point
 document.addEventListener("DOMContentLoaded", function(event) {
   const cards = document.querySelector('.deck');
   shuffle(cards);
   cards.addEventListener('click', cardListener);
+  const refresh = document.querySelector('.restart');
+  refresh.addEventListener('click', refreshListener);
 });
+
+function resetMoves() {
+  const moves = document.querySelector('.moves');
+  moves.textContent = 0;
+}
+
+// Add refresh
+function refreshListener(event) {
+  const cards = document.querySelector('.deck');
+  shuffle(cards);
+  for (let i = 0; i < cards.children.length; i++) {
+    const card = cards.children[i];
+    resetCard(card);
+  }
+  resetMoves();
+}
