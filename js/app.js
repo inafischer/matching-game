@@ -39,6 +39,23 @@ function checkWinner() {
   }
 }
 
+// Star rating
+function lowerStarRating () {
+  const rating = document.querySelector('.stars');
+  const moves = parseInt(document.querySelector('.moves').textContent);
+  if (moves >= 5 && rating.children.length > 1) {
+    rating.removeChild(rating.children[rating.children.length - 1]);
+  }
+}
+
+function resetRating() {
+  const rating = document.querySelector('.stars');
+  for (let stars = rating.children.length; stars <= 2; stars++) {
+    const star = document.createElement('li');
+    star.innerHTML = '<i class="fa fa-star"></i>';
+    rating.appendChild(star);
+  }
+}
 
 const openCards = [];
 
@@ -57,6 +74,7 @@ function addOpenCard(card) {
       }
       increaseMoves();
       checkWinner();
+      lowerStarRating();
   }
 }
 
@@ -106,4 +124,5 @@ function refreshListener(event) {
     resetCard(card);
   }
   resetMoves();
+  resetRating();
 }
