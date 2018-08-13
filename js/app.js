@@ -65,11 +65,12 @@ function getIcon(card) {
 }
 
 function cardListener(event) {
-  if(event.target.classList.contains('card')) {
-    console.log('clicked a card');
-    console.log(event.target);
-    displaySymbol(event.target);
-    addOpenCard(event.target);
+  var element = event.target;
+  if(element.classList.contains('card')
+    && !element.classList.contains('match')
+    && !element.classList.contains('open') ) {
+    displaySymbol(element);
+    addOpenCard(element);
   }
   else {
     console.log('clicked the deck');
